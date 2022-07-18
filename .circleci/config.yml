@@ -3,20 +3,20 @@ version: 2.1
 executors:
   rust-env:
     docker:
-      - image: cimg/rust:1.60
+      - image: cimg/rust:1.62
 
 commands:
   cargo-build:
     parameters:
       rust-version:
-        default: "1.60.0"
+        default: "1.62.0"
         type: string
     steps:
       - run:
           name: Update Rust and check build <<parameters.rust-version>>
           command: |
             rustup update <<parameters.rust-version>>
-            cargo +<<parameters.rust-version>> check --all-features
+            cargo +<<parameters.rust-version>> check --all-features --workspace --examples
   cargo-format:
     steps:
       - run:
@@ -28,7 +28,8 @@ commands:
     steps:
       - run:
           name: Check idiomatic code use with Clippy
-          command: "cargo clippy --all --tests --all-features -- -D warnings"
+          command: "cargo clippy --workspace --examples --tests --all-features -- -D
+            warnings"
   cargo-test:
     steps:
       - run:
@@ -57,7 +58,9 @@ jobs:
       - cargo-build:
           rust-version: "stable"
       - cargo-build:
-          rust-version: "1.56.0"
+          rust-version: "1.56"
+    # The resource_class feature allows configuring CPU and RAM resources for each job. Different resource classes are available for different executors. https://circleci.com/docs/2.0/configuration-reference/#resourceclass
+    resource_class: large
 
   test:
     executor: rust-env
@@ -67,8 +70,6 @@ jobs:
       - cargo-format
       - cargo-clippy
       - cargo-test
-    # The resource_class feature allows configuring CPU and RAM resources for each job. Different resource classes are available for different executors. https://circleci.com/docs/2.0/configuration-reference/#resourceclass
-    resource_class: large
 
   docs:
     executor: rust-env
