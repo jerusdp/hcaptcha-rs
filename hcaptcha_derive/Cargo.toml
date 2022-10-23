@@ -1,38 +1,29 @@
 [package]
 name = "hcaptcha_derive"
-version = "2.1.1"
-edition = "2018"
-description = """
-Derive macro for hCaptcha. Please use hcaptcha crate.
-"""
-authors = ["Jeremiah Russell <jrussell@jerus.ie>"]
-license = "MIT OR Apache-2.0"
-repository = "https://github.com/jerusdp/hcaptcha-rs"
-readme = "README.md"
-documentation = "https://docs.rs/hcaptcha_derive"
-categories = ["web-programming"]
-keywords = ["hcaptcha", "captcha", "security", "backend", "protection"]
-include = [
-    "**/*.rs",
-    "Cargo.toml",
-    "README.md",
-    "LICENSE-APACHE",
-    "LICENSE-MIT",
-    "CHANGES.md",
-]
+description.workspace = true
+version.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+edition.workspace = true
+readme.workspace = true
+documentation.workspace = true
+categories.workspace = true
+keywords.workspace = true
+include.workspace = true
 
 [lib]
-name= "hcaptcha_derive"
+name = "hcaptcha_derive"
 proc-macro = true
 
 [dependencies]
-syn = { version = "1.0", features = ["extra-traits"] }
-quote = "1.0"
-proc-macro2 = "1.0"
-proc-macro-error = "1"
+syn.worspace = true
+quote.worspace = true
+proc-macro2.worspace = true
+proc-macro-error.worspace = true
 
 [dev-dependencies]
-hcaptcha = {path = "../hcaptcha" }
+hcaptcha = { path = "../hcaptcha" }
 
 [package.metadata.docs.rs]
 all-features = true
