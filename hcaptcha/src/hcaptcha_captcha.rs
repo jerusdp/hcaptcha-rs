@@ -121,7 +121,7 @@ impl HcaptchaCaptcha {
     ///
     /// ```no_run
     ///     use hcaptcha::HcaptchaCaptcha;
-    /// # use claim::assert_some;
+    /// # use claims::assert_some;
     /// # #[derive(serde::Deserialize, serde::Serialize, Clone, Debug, Default)]
     /// # struct CustomEvent {
     /// #   body: Option<String>,
@@ -196,7 +196,7 @@ impl HcaptchaCaptcha {
     ///
     /// ```no_run
     ///     use hcaptcha::HcaptchaCaptcha;
-    /// # use claim::assert_some;
+    /// # use claims::assert_some;
     /// # #[derive(serde::Deserialize, serde::Serialize, Clone, Debug, Default)]
     /// # struct CustomEvent {
     /// #   body: Option<String>,
@@ -321,7 +321,7 @@ impl HcaptchaCaptcha {
     ///
     /// ```no_run
     ///     use hcaptcha::HcaptchaCaptcha;
-    /// # use claim::assert_some;
+    /// # use claims::assert_some;
     ///     let (remoteip, captcha) = get_captcha();
     ///     
     ///     let value = captcha.remoteip();
@@ -379,7 +379,7 @@ impl HcaptchaCaptcha {
     ///
     /// ```no_run
     ///     use hcaptcha::HcaptchaCaptcha;
-    /// # use claim::assert_some;
+    /// # use claims::assert_some;
     ///     let (sitekey, captcha) = get_captcha();
     ///
     ///     let value = captcha.sitekey();
@@ -431,7 +431,7 @@ impl HcaptchaCaptcha {
 mod tests {
     use super::*;
     use crate::Code;
-    use claim::{assert_err, assert_none, assert_ok, assert_some};
+    use claims::{assert_err, assert_none, assert_ok, assert_some};
     use rand::distributions::Alphanumeric;
     use rand::{thread_rng, Rng};
     use std::iter;

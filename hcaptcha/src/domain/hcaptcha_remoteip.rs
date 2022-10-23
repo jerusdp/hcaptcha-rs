@@ -67,7 +67,7 @@ mod tests {
     use super::HcaptchaRemoteip;
     use crate::Code;
     use crate::HcaptchaError;
-    use claim::{assert_err, assert_ok};
+    use claims::{assert_err, assert_ok};
 
     #[test]
     fn whitespace_only_ip_strings_are_rejected() {

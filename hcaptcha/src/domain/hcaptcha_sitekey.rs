@@ -65,7 +65,7 @@ mod tests {
     use super::HcaptchaSitekey;
     use crate::Code;
     use crate::HcaptchaError;
-    use claim::{assert_err, assert_ok};
+    use claims::{assert_err, assert_ok};
 
     // const CYAN: &str = "\u{001b}[36m";
     // const RESET: &str = "\u{001b}[0m";

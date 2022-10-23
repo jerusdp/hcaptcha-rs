@@ -1,7 +1,7 @@
 mod helper;
 
 use chrono::{Duration, Utc};
-use claim::assert_ok;
+use claims::assert_ok;
 use hcaptcha::Hcaptcha;
 use serde_json::json;
 use wiremock::matchers::{body_string, method, path};

@@ -260,7 +260,7 @@ mod tests {
     use super::*;
     use crate::Code;
     use chrono::{Duration, Utc};
-    use claim::assert_ok;
+    use claims::assert_ok;
     use rand::distributions::Alphanumeric;
     use rand::{thread_rng, Rng};
     use serde_json::json;

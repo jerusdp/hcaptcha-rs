@@ -33,7 +33,7 @@ mod tests {
     use super::HcaptchaClientResponse;
     use crate::Code;
     use crate::HcaptchaError;
-    use claim::assert_err;
+    use claims::assert_err;
 
     #[test]
     fn whitespace_only_names_are_rejected() {

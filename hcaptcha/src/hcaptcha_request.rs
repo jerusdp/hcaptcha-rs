@@ -340,7 +340,7 @@ impl HcaptchaRequest {
 mod tests {
     use super::*;
     use crate::HcaptchaCaptcha;
-    use claim::{assert_none, assert_ok};
+    use claims::{assert_none, assert_ok};
     use rand::distributions::Alphanumeric;
     use rand::{thread_rng, Rng};
     use std::iter;

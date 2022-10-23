@@ -83,7 +83,7 @@ mod tests {
     use super::HcaptchaSecret;
     use crate::Code;
     use crate::HcaptchaError;
-    use claim::{assert_err, assert_ok};
+    use claims::{assert_err, assert_ok};
 
     #[test]
     fn whitespace_only_secrets_are_rejected() {

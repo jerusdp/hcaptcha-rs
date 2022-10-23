@@ -57,7 +57,7 @@ async fn main() {
     };
     let response = form.valid_response(&secret, Some(uri)).await;
 
-    claim::assert_err!(&response);
+    claims::assert_err!(&response);
 
     if let Err(codes) = response {
         match codes {
