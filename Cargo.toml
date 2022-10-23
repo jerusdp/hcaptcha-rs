@@ -1,3 +1,60 @@
 [workspace]
-members = ["hcaptcha", "hcaptcha_derive" , "test_suite"]
+members = ["hcaptcha", "hcaptcha_derive", "test_suite"]
 exclude = ["lambda-contact"]
+
+[workspace.package]
+authors = ["Jeremiah Russell <jrussell@jerus.ie>"]
+description = """
+hCaptcha client response verification. Validate the hCaptcha response submitted from to your server from the client.
+"""
+edition = "2018"
+version = "2.1.1"
+keywords = ["hcaptcha", "captcha", "security", "backend", "protection"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/jerusdp/hcaptcha-rs"
+readme = "README.md"
+documentation = "https://docs.rs/hcaptcha"
+categories = ["web-programming"]
+include = [
+    "**/*.rs",
+    "Cargo.toml",
+    "README.md",
+    "LICENSE-APACHE",
+    "LICENSE-MIT",
+    "CHANGES.md",
+]
+
+[workspace.dependencies]
+async-trait = "0.1"
+chrono = "0.4"
+claims = "0.7"
+env_logger = "0.9"
+hex = "0.4"
+itertools = "0.10"
+lambda_runtime = "0.6"
+log = "0.4"
+mockd = "0.3"
+rand = "0.8"
+reqwest = { version = "0.11", features = ["json"] }
+rusoto_core = { version = "0.48", default_features = false, features = [
+    "rustls",
+] }
+rusoto_ses = { version = "0.48", default_features = false, features = [
+    "rustls",
+] }
+serde_json = "1.0"
+serde_urlencoded = "0.7"
+serde = { version = "1.0", features = ["derive"] }
+simple_logger = "2.3"
+thiserror = "1.0"
+tokio = { version = "1.21", features = ["macros", "rt-multi-thread"] }
+tracing = "0.1"
+tracing-appender = "0.2"
+tracing-bunyan-formatter = "0.3"
+tracing-log = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+tracing-test = "0.2"
+trybuild = "1.0"
+uuid = "1.1"
+url = "2.3"
+wiremock = "0.5"
