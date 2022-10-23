@@ -1,26 +1,22 @@
 [package]
 name = "test_suite"
-version = "0.1.1"
-edition = "2018"
 publish = false
+version = "0.2.0"
+edition = "2021"
 
 [dependencies]
-# hcaptcha = { path = "../hcaptcha" }
-# hcaptcha_derive = { path = "../hcaptcha_derive"}
 
 [dev-dependencies]
-trybuild = "1.0"
+chrono = "0.4"
+claims = "0.7"
+env_logger = "0.9"
 hcaptcha = { path = "../hcaptcha" }
 hcaptcha_derive = { path = "../hcaptcha_derive" }
-tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
-claim = { git = "https://github.com/Turbo87/rust-claim.git", rev = "23892a3" }
-conduit-test = "=0.10.0"
-# claim = "0.5.0"
-mockd = "0.3.0"
-itertools = "0.10.5"
-rand = "0.8"
-wiremock = "0.5"
-serde_json = "1"
 hex = "0.4"
-chrono = "0.4.22"
-env_logger = "0.9.1"
+itertools = "0.10"
+mockd = "0.3"
+rand = "0.8"
+serde_json = "1.0"
+tokio = { version = "1.21", features = ["macros", "rt-multi-thread"] }
+trybuild = "1.0"
+wiremock = "0.5"
