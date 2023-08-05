@@ -1,14 +1,21 @@
 {
     "cSpell.words": [
+        "clippy",
         "compilefail",
+        "compiletest",
         "dd'T'HH",
+        "docsrs",
+        "Dwarnings",
         "fakeit",
+        "hcaptcha",
         "invalidhcaptchastring",
         "itertools",
         "Itertools",
         "lamedh",
         "mockd",
         "panicbit",
+        "RUSTDOCFLAGS",
+        "rustls",
         "sitekeys",
         "siteverify",
         "Struct",
@@ -23,7 +30,8 @@
         "release",
         "docs",
         "Examples",
-        "derive"
+        "derive",
+        "wasm"
     ],
     "rust-analyzer.rustc.source": null
 }

@@ -29,6 +29,7 @@ ext = ["hex"]
 enterprise = []
 trace = ["tracing"]
 nightly = []
+wasm = []
 
 [dependencies]
 async-trait = "0.1"
