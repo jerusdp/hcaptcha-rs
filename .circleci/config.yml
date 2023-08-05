@@ -3,7 +3,7 @@ version: 2.1
 parameters:
   min-rust-version:
     type: string
-    default: "1.63"
+    default: "1.65"
 
 executors:
   rust-env:
