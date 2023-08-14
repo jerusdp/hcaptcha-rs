@@ -61,7 +61,6 @@ use crate::HcaptchaError;
 use crate::HcaptchaRequest;
 use crate::HcaptchaResponse;
 use reqwest::{Client, Url};
-
 mod hcaptcha_form;
 
 use hcaptcha_form::HcaptchaForm;
@@ -230,6 +229,7 @@ impl HcaptchaClient {
             level = "debug"
         )
     )]
+    #[cfg(not(feature = "wasi"))]
     pub async fn verify_client_response(
         self,
         request: HcaptchaRequest,
@@ -252,6 +252,102 @@ impl HcaptchaClient {
         tracing::debug!("The response is: {:?}", response);
         response.check_error()?;
         Ok(response)
+    }
+
+    /// Verify the client token with the Hcaptcha API.
+    ///
+    /// Call the Hcaptcha api providing a [HcaptchaRequest] struct.
+    ///
+    /// # Inputs
+    ///
+    /// HcaptchaRequest contains the required and optional fields
+    /// for the Hcaptcha API. The required fields include the response
+    /// code to validate and the secret key.
+    ///
+    /// # Outputs
+    ///
+    /// This method returns [HcaptchaResponse] if successful and [HcaptchaError] if
+    /// unsuccessful.
+    ///
+    /// # Example
+    ///
+    ///
+    ///  ```no_run
+    ///     use hcaptcha::{HcaptchaClient, HcaptchaRequest};
+    /// # use hcaptcha::HcaptchaCaptcha;
+    /// # use rand::distributions::Alphanumeric;
+    /// # use rand::{thread_rng, Rng};
+    /// # use std::iter;
+    /// # #[tokio::main]
+    /// # async fn main() -> Result<(), hcaptcha::HcaptchaError> {
+    ///     let secret = get_your_secret(); // your secret key
+    ///     let captcha = get_captcha();  // user's token
+    ///
+    ///     let request = HcaptchaRequest::new(&secret, captcha)?;
+    ///
+    ///     let client = HcaptchaClient::new();
+    ///
+    ///     let response = client.verify_client_response(request).await?;
+    ///
+    /// # #[cfg(feature = "enterprise")]
+    ///     let score = response.score();
+    /// # #[cfg(feature = "enterprise")]
+    ///     let score_reasons = response.score_reason();
+    ///
+    /// # Ok(())
+    /// # }
+    /// # fn get_your_secret() -> String {
+    /// #   "0x123456789abcde0f123456789abcdef012345678".to_string()
+    /// # }
+    /// # fn random_response() -> String {
+    /// #    let mut rng = thread_rng();
+    /// #    iter::repeat(())
+    /// #        .map(|()| rng.sample(Alphanumeric))
+    /// #        .map(char::from)
+    /// #        .take(100)
+    /// #        .collect()
+    /// # }
+    /// # fn get_captcha() -> HcaptchaCaptcha {
+    /// #    HcaptchaCaptcha::new(&random_response())
+    /// #       .unwrap()
+    /// #       .set_remoteip(&mockd::internet::ipv4_address())
+    /// #       .unwrap()
+    /// #       .set_sitekey(&mockd::unique::uuid_v4())
+    /// #       .unwrap()
+    /// #       }
+    /// ```
+    ///
+    /// # Logging
+    ///
+    /// If the `trace` feature is enabled a debug level span is set for the
+    /// method and an event logs the response.
+    ///
+    #[cfg(feature = "wasi")]
+    pub async fn verify_client_response(
+        self,
+        request: HcaptchaRequest,
+    ) -> Result<HcaptchaResponse, HcaptchaError> {
+        let form: HcaptchaForm = request.into();
+        #[cfg(feature = "trace")]
+        tracing::debug!(
+            "The form to submit to Hcaptcha API: {:?}",
+            serde_urlencoded::to_string(&form).unwrap_or_else(|_| "form corrupted".to_owned())
+        );
+
+        // let response = self
+        //     .client
+        //     .post(self.url.clone())
+        //     .form(&form)
+        //     .send()?
+        //     .json::<HcaptchaResponse>()?;
+
+        let response =
+            futures::executor::block_on(self.client.post(self.url.clone()).form(&form).send())?;
+        let body_json = futures::executor::block_on(response.json::<HcaptchaResponse>())?;
+        #[cfg(feature = "trace")]
+        tracing::debug!("The response is: {:?}", body_json);
+        body_json.check_error()?;
+        Ok(body_json)
     }
 }
 

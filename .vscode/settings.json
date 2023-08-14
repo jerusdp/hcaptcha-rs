@@ -31,7 +31,7 @@
         "docs",
         "Examples",
         "derive",
-        "wasm"
+        "wasi"
     ],
     "rust-analyzer.rustc.source": null
 }
